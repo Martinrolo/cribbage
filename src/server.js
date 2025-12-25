@@ -22,3 +22,11 @@ httpserver.listen(5000);
 // setInterval(() => {
 //     tick()
 // }, 1000 / TICK_RATE );
+
+app.get('/', (req, res) => {
+    res.sendFile('menu.html', { root: __dirname });
+});
+
+app.get('/cribbage', (req, res) => {
+    res.sendFile('cribbage.html', { root: __dirname });
+});

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Cribbage – Partie</title>
+    <link rel="stylesheet" href="/styles/cribbage.css">
+</head>
+<body>
+
+<div class="game-container">
+
+    <!-- SCORE -->
+    <header class="scoreboard">
+        <div class="player-score">
+            <h2>Joueur</h2>
+            <span>42</span>
+        </div>
+
+        <div class="center-info">
+            <h1>CRIBBAGE</h1>
+            <p>Tour du joueur</p>
+        </div>
+
+        <div class="player-score">
+            <h2>Adversaire</h2>
+            <span>36</span>
+        </div>
+    </header>
+
+    <!-- TABLE -->
+    <main class="table">
+
+        <!-- Adversaire -->
+        <section class="hand opponent">
+            <div class="card back"></div>
+            <div class="card back"></div>
+            <div class="card back"></div>
+            <div class="card back"></div>
+        </section>
+
+        <!-- Zone centrale -->
+        <section class="center-table">
+            <div class="played-cards">
+                <div class="card">5♣</div>
+                <div class="card">10♥</div>
+            </div>
+            <div class="count">
+                <span>Compte : 15</span>
+            </div>
+        </section>
+
+        <!-- Joueur -->
+        <section class="hand player">
+            <div class="card">A♠</div>
+            <div class="card">7♦</div>
+            <div class="card">8♣</div>
+            <div class="card">K♥</div>
+        </section>
+
+    </main>
+
+    <!-- ACTIONS -->
+    <footer class="controls show">
+            <button>Jouer la carte</button>
+            <button>Go</button>
+            <button>Compter les points</button>
+            <button class="danger">Quitter</button>
+    </footer>
+
+</div>
+
+</body>
+</html>
