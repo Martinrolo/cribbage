@@ -12,8 +12,8 @@
     <!-- SCORE -->
     <header class="scoreboard">
         <div class="player-score">
-            <h2>Joueur</h2>
-            <span>42</span>
+            <h2>Joueur 1</h2>
+            <span>0</span>
         </div>
 
         <div class="center-info">
@@ -22,8 +22,8 @@
         </div>
 
         <div class="player-score">
-            <h2>Adversaire</h2>
-            <span>36</span>
+            <h2>Joueur 2</h2>
+            <span>0</span>
         </div>
     </header>
 
@@ -32,29 +32,44 @@
 
         <!-- Adversaire -->
         <section class="hand opponent">
-            <div class="card back"></div>
-            <div class="card back"></div>
-            <div class="card back"></div>
-            <div class="card back"></div>
+            <div class="cards">
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+            </div>
+
+            <div class="crib">
+                <div class="card back"></div>
+            </div>
         </section>
 
         <!-- Zone centrale -->
         <section class="center-table">
             <div class="played-cards">
-                <div class="card">5♣</div>
-                <div class="card">10♥</div>
+                <div class="card back"></div>
             </div>
             <div class="count">
-                <span>Compte : 15</span>
+                <span>Compte : 0</span>
             </div>
         </section>
 
         <!-- Joueur -->
         <section class="hand player">
-            <div class="card">A♠</div>
-            <div class="card">7♦</div>
-            <div class="card">8♣</div>
-            <div class="card">K♥</div>
+            <div class="cards">
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+                <div class="card back"></div>
+            </div>
+
+            <div class="crib">
+                <div class="card back"></div>
+            </div>
         </section>
 
     </main>
@@ -70,4 +85,7 @@
 </div>
 
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script type="module" src="/publicCribbage.js"></script>
+<script src="/constants.js"></script>
 </html>

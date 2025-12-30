@@ -11,14 +11,25 @@
         <h1>♠ CRIBBAGE ♠</h1>
 
         <div class="menu">
-            <button>Jouer</button>
-            <button>Multijoueur</button>
+
+            <!-- Input Room -->
+            <input 
+                type="text"
+                id="roomInput"
+                placeholder="Numéro de room"
+                maxlength="6"
+            >
+
+            <button id="jouerBtn">Jouer</button>
         </div>
 
         <footer>
-            <p>Test</p>
+            <p>Entre une room pour jouer en ligne</p>
         </footer>
     </div>
 
 </body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/constants.js"></script>
+<script src="/menu.js"></script>
 </html>

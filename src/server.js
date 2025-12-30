@@ -1,32 +1,13 @@
-import express from 'express'
-import { createServer } from "http";
-import { Server } from 'socket.io';
-import { __dirname } from '../public/getDirectory.js';
+import { createServer } from 'http'
+import app from './app.js'
+import initSocket from './config/socket.js'
 
-const app = express()
-const httpserver = createServer(app);
+const httpServer = createServer(app)
 
-//Create socket
-const io = new Server(httpserver, {
-    cors: {
-      origin: "*",
-      methods: ["GET", "POST"]
-    }
-});
+// init socket
+initSocket(httpServer)
 
-//Listen to port 5000
-app.use(express.static(__dirname));
-httpserver.listen(5000);
-
-// Update every tick rate
-// setInterval(() => {
-//     tick()
-// }, 1000 / TICK_RATE );
-
-app.get('/', (req, res) => {
-    res.sendFile('menu.html', { root: __dirname });
-});
-
-app.get('/cribbage', (req, res) => {
-    res.sendFile('cribbage.html', { root: __dirname });
-});
+// listen
+httpServer.listen(5000, () => {
+    console.log('Server running on http://localhost:5000');
+})
