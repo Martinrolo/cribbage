@@ -1,18 +1,20 @@
-// Click sur "Multijoueur"
-jouerBtn.addEventListener('click', () => {
-    const room = roomInput.value.trim();
+// Click sur "Créer"
+creerRoomBtn.addEventListener('click', () => {
+    const room = crypto.randomUUID(); 
+    socket.emit('createRoom', room);
 
-    if (!room) {
-        alert('Entre un numéro de room tabarnak');
-        return;
-    }
+    socket.once('roomJoined', (room) => {
+        window.location.href = `/cribbage?room=${room}`;
+    });
+});
 
+rejoindreRoomBtn.addEventListener('click', () => {
+    const room = roomInput.value;
     socket.emit('joinRoom', room);
-    console.log('Joining room:', room);
+
+    socket.once('roomJoined', (room) => {
+        window.location.href = `/cribbage?room=${room}`;
+    });
 });
 
-// ✅ confirmation serveur → redirection
-socket.on('roomJoined', (room) => {
-    console.log('Joined room:', room);
-    window.location.href = '/cribbage';
-});
+

@@ -1,0 +1,52 @@
+export let rooms = new Map();
+
+export class Game {
+    constructor() {
+        this.players = []
+        this.finalScore = 120;
+        this.cards = []
+        this.round = new Round();
+    }
+
+    initCards() {
+        for (let i = 0; i < 52; i++) {
+            this.cards.push(i)
+        }
+    }
+
+    giveCardsPlayers() {
+        for (let i = 0; i < 6; i++) {
+            //Donner 6 cartes par joueur
+            for (const player of this.players) {
+                player.cards[i] = this.dealCard()
+            }
+        }
+    }
+
+    dealCard()
+    {
+        let randomIndex = Math.floor(Math.random() * this.cards.length);
+        let card = this.cards[randomIndex];
+        this.cards.splice(randomIndex, 1);
+
+        return card;
+    }
+}
+
+export class Player {
+    constructor(socketId) {
+        this.socketId = socketId;
+        this.score = 0;
+        this.cards = [];
+    }
+}
+
+export class Round {
+    // constructor() {
+
+    //     this.initCards();
+    //     this.giveCards();
+    // }
+
+
+}
