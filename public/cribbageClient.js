@@ -17,6 +17,11 @@ socket.on('roomFull', (msg) => {
     window.location.replace('/');
 });
 
+socket.on('error', (errorMsg) => {
+    alert(errorMsg);
+    window.location.replace('/');
+});
+
 
 function setPlayerInfo(game)
 {

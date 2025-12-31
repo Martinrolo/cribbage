@@ -24,17 +24,21 @@ export function cribbageSockets(io, socket) {
     });
 
     socket.on('pageLoaded', (room, playerId) => {
-        console.log("ROOM OF PAGE LOADED:")
-        console.log(rooms.get(room).game.players)
-        console.log(playerId)
+        const roomData = rooms.get(room);
 
-        if(rooms.get(room).game.players.filter(p => p.playerId === playerId).length === 0)
+        if(!roomData)
+        {
+            socket.emit('error', "Erreur! Retour vers le menu");
+            return; 
+        }
+
+        if(roomData.game.players.filter(p => p.playerId === playerId).length === 0)
         {
             socket.emit('roomFull', 'Cette room est pleine')
             return;
         }
 
-        socket.emit('playerJoined', rooms.get(room).game);
+        socket.emit('playerJoined', roomData.game);
     });
 
     socket.on('disconnect', () => {
