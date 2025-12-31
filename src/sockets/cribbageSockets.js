@@ -1,42 +1,54 @@
 import { Player, Game, rooms } from '../gameObjects.js';
 
 export function cribbageSockets(io, socket) {
-    socket.on('createRoom', (room) => {
+    socket.on('createRoom', (room, playerId) => {
         let game = new Game();
         rooms.set(room, {game: game});
 
-        console.log(rooms)
-
-        game.players.push(new Player(socket.id));
+        game.players.push(new Player(playerId));
         socket.join(room);
         socket.emit('roomJoined', room);
     });
 
-    socket.on('joinRoom', (room) => {
-        console.log("JOIN ROOM: " + room)
-        console.log(rooms)
+    socket.on('joinRoom', (room, playerId) => {
+        const roomData = rooms.get(room)
+        if (!roomData || roomData.game.players.length >= 2)
+        {
+            socket.emit('error', "Cette room n'existe pas!");
+            return; 
+        } 
 
-        // if (!game || game.players.length >= 2) return;
-
-        // game.players.push(new Player(socket.id));
-        // socket.join(room);
-        // socket.emit('roomJoined', game);
+        roomData.game.players.push(new Player(playerId));
+        socket.join(room);
+        socket.emit('roomJoined', room);
     });
 
-    socket.on('pageLoaded', (room) => {
-        socket.emit('gameInfo', rooms.get(room).game);
+    socket.on('pageLoaded', (room, playerId) => {
+        console.log("ROOM OF PAGE LOADED:")
+        console.log(rooms.get(room).game.players)
+        console.log(playerId)
+
+        if(rooms.get(room).game.players.filter(p => p.playerId === playerId).length === 0)
+        {
+            socket.emit('roomFull', 'Cette room est pleine')
+            return;
+        }
+
+        socket.emit('playerJoined', rooms.get(room).game);
     });
 
     socket.on('disconnect', () => {
-        for (const [roomId, room] of rooms.entries()) {
-            room.game.players = room.game.players.filter(p => p.socketId !== socket.id);
-            if (room.game.players.length === 0) {
-                rooms.delete(roomId);
-            } else {
-                io.to(roomId).emit('roomUpdate', room);
-            }
-        }
+        // for (const [roomId, room] of rooms.entries()) {
+        //     room.game.players = room.game.players.filter(p => p.playerId !== socket.id);
+        //     if (room.game.players.length === 0) {
+        //         rooms.delete(roomId);
+        //     } else {
+        //         io.to(roomId).emit('roomUpdate', room);
+        //     }
+        // }
     });
+
+
 
     // PLUS TARD :
     // socket.on('playCard', ...)

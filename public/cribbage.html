@@ -12,18 +12,22 @@
     <!-- SCORE -->
     <header class="scoreboard">
         <div class="player-score">
-            <h2>Joueur 1</h2>
-            <span>0</span>
+            <h2 id="player1-name">Joueur 1</h2>
+            <span id="player1-score">0</span>
         </div>
 
         <div class="center-info">
             <h1>CRIBBAGE</h1>
-            <p id="message">Room ID:</p>
+            <p id="message">
+                Room ID:
+                <span id="room-id"></span>
+                <button id="copy-room" title="Copier le code">📋</button>
+            </p>
         </div>
 
         <div class="player-score">
-            <h2>Joueur 2</h2>
-            <span>0</span>
+            <h2 id="player2-name">Joueur 2</h2>
+            <span id="player2-score">0</span>
         </div>
     </header>
 

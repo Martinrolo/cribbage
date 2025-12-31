@@ -34,8 +34,9 @@ export class Game {
 }
 
 export class Player {
-    constructor(socketId) {
-        this.socketId = socketId;
+    constructor(playerId) {
+        this.playerId = playerId;
+        this.name = "Player"
         this.score = 0;
         this.cards = [];
     }
