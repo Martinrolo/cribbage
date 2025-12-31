@@ -25,6 +25,7 @@ socket.on('error', (errorMsg) => {
 
 function setPlayerInfo(game)
 {
+    console.log("SET INFO")
     const playerDivs = document.querySelectorAll('.player-score')
 
     for(let i = 0; i < game.players.length; i++)
@@ -36,6 +37,10 @@ function setPlayerInfo(game)
         scoreEl.textContent = "Score: " + game.players[i].score;
 
         playerDivs[i].style.visibility = 'visible';
+
+        if (game.players[i].playerId === localStorage.getItem('playerId')) {
+            playerDivs[i].classList.add('you');
+        }
     }
 }
 

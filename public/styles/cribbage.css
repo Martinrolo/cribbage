@@ -60,6 +60,10 @@ html, body {
     font-weight: bold;
 }
 
+.player-score.you h2 {
+    color: #9cff9c;
+}
+
 .center-info {
     text-align: center;
 }
@@ -74,6 +78,7 @@ html, body {
     display: grid;
     grid-template-rows: auto 1fr auto;
     padding: 40px;
+    visibility: hidden;
 }
 
 .hand {

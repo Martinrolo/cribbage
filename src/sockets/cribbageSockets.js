@@ -38,7 +38,7 @@ export function cribbageSockets(io, socket) {
             return;
         }
 
-        socket.emit('playerJoined', roomData.game);
+        io.emit('playerJoined', roomData.game);
     });
 
     socket.on('disconnect', () => {
