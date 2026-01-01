@@ -4,9 +4,6 @@ export function cribbageSockets(io, socket) {
     socket.on('createRoom', (room, playerId) => {
         let game = new Game();
         rooms.set(room, {game: game});
-
-        game.players.push(new Player(playerId));
-        socket.join(room);
         socket.emit('roomJoined', room);
     });
 
@@ -18,8 +15,6 @@ export function cribbageSockets(io, socket) {
             return; 
         } 
 
-        roomData.game.players.push(new Player(playerId));
-        socket.join(room);
         socket.emit('roomJoined', room);
     });
 
@@ -32,13 +27,18 @@ export function cribbageSockets(io, socket) {
             return; 
         }
 
-        if(roomData.game.players.filter(p => p.playerId === playerId).length === 0)
+        if(roomData.game.players.length === 2)
         {
             socket.emit('roomFull', 'Cette room est pleine')
             return;
         }
 
-        io.emit('playerJoined', roomData.game);
+        roomData.game.players.push(new Player(playerId));
+        socket.join(room);
+        console.log("PLAYERS: ")
+        console.log(roomData)
+
+        io.to(room).emit('playerJoined', roomData.game);
     });
 
     socket.on('disconnect', () => {

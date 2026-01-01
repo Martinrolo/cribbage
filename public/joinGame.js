@@ -44,9 +44,9 @@ function setPlayerInfo(game)
     }
 }
 
+//Bouton copier
 const roomIdSpan = document.getElementById('room-id');
 const copyBtn = document.getElementById('copy-room');
-
 roomIdSpan.textContent = room;
 
 copyBtn.addEventListener('click', async () => {
