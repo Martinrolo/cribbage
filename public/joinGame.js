@@ -10,6 +10,7 @@ socket.emit('pageLoaded', room, localStorage.getItem('playerId'));
 
 socket.on('playerJoined', (game) => {
     setPlayerInfo(game)
+    updateWaitingState(game);
 });
 
 socket.on('roomFull', (msg) => {
@@ -57,4 +58,27 @@ copyBtn.addEventListener('click', async () => {
     } catch (err) {
         alert('Impossible de copier le code');
     }
+});
+
+const overlay = document.getElementById('table-overlay');
+const waitingText = document.getElementById('waiting-text');
+const startBtn = document.getElementById('start-game-btn');
+
+function updateWaitingState(game) {
+    if (game.players.length < 2) {
+        overlay.style.display = 'flex';
+        waitingText.textContent = 'En attente de joueurs…';
+        startBtn.style.display = 'none';
+        return;
+    }
+
+    // 2 joueurs
+    overlay.style.display = 'flex';
+    waitingText.textContent = '2 joueurs connectés';
+    startBtn.style.display = 'block';
+    overlay.style.pointerEvents = 'all';
+}
+
+startBtn.addEventListener('click', () => {
+    socket.emit('startGame', room);
 });

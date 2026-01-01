@@ -1,6 +1,9 @@
-const params = new URLSearchParams(window.location.search);
-const room = params.get('room');
+socket.on('gameStarted', (game) => {
+    overlay.style.display = 'none';
 
-socket.on('TEST', (game) => {
-
+    document.querySelectorAll('.card').forEach(card => {
+        card.style.visibility = 'visible';
+    });
 });
+
+//TODO: Faire logique startGame dans serveur
