@@ -11,5 +11,7 @@ export default function initSocket(httpServer) {
 
     io.on('connection', (socket) => {
         cribbageSockets(io, socket);
+
+        //TODO: Faire autres fichiers pour sockets d'autres fonctionnalités
     });
 }

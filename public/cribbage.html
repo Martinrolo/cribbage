@@ -36,9 +36,9 @@
         <p id="waiting-text">En attente de joueurs…</p>
         <button id="start-game-btn">Commencer la partie</button>
     </div>
-    <main class="table">
+    <!-- <main class="table"> -->
         <!-- Adversaire -->
-        <section class="hand opponent">
+        <!-- <section class="hand opponent">
             <div class="cards">
                 <div class="card back"></div>
                 <div class="card back"></div>
@@ -51,20 +51,20 @@
             <div class="crib">
                 <div class="card back"></div>
             </div>
-        </section>
+        </section> -->
 
         <!-- Zone centrale -->
-        <section class="center-table">
+        <!-- <section class="center-table">
             <div class="played-cards">
                 <div class="card back"></div>
             </div>
             <div class="count">
                 <span>Compte : 0</span>
             </div>
-        </section>
+        </section> -->
 
         <!-- Joueur -->
-        <section class="hand player">
+        <!-- <section class="hand player">
             <div class="cards">
                 <div class="card back"></div>
                 <div class="card back"></div>
@@ -77,9 +77,24 @@
             <div class="crib">
                 <div class="card back"></div>
             </div>
-        </section>
+        </section> -->
+    <!-- </main> -->
 
-    </main>
+    <section class="table">
+        <div class="hand opponent">
+            <div class="cards" id="opponent"></div>
+        </div>
+
+        <div class="center-table">
+            <div id="deck" class="deck"></div>
+            <h2 id="compte">Compte: 0</h2>
+        </div>
+
+        <div class="hand player">
+            <div class="cards" id="player-hand"></div>
+        </div>
+    </section>
+
 
     <!-- ACTIONS -->
     <footer class="controls">

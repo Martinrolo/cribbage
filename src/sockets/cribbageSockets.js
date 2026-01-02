@@ -52,10 +52,19 @@ export function cribbageSockets(io, socket) {
         // }
     });
 
+    socket.on('startGame', (room) => {
+        const roomData = rooms.get(room);
+        if (!roomData) return;
 
+        //init cards
+        roomData.game.initCards();
+        roomData.game.giveCardsPlayers();
 
-    // PLUS TARD :
-    // socket.on('playCard', ...)
-    // socket.on('endTurn', ...)
+        console.log("GAME DATA:")
+        console.log(roomData.game.players[0].cards)
+
+        roomData.game.started = true;
+        io.to(room).emit('gameStarted', roomData.game);
+    });
 }
 
