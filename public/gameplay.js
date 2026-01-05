@@ -4,10 +4,7 @@ socket.on('gameStarted', async (game) => {
 });
 
 socket.on('newRound', (game) => {
-    console.log(game)
-
-    let localPlayerID = localStorage.getItem('playerId')
-    let indexPlayer = game.players[0].playerId == localPlayerID ? 0 : 1;
+    const indexPlayer = getIndexPlayer(game.players)
 
     document.querySelector('.controls').classList.add('show')
     document.querySelector('.center-table').style.visibility = 'visible'
@@ -15,7 +12,6 @@ socket.on('newRound', (game) => {
     if(game.cribIndex === indexPlayer)
     {
         document.querySelector('.center-table').textContent = "Choisis des cartes pour ton crib"
-
     }
 
     else
@@ -34,6 +30,20 @@ confirmerCrib.addEventListener('click', function() {
             cards
         });
     }
+})
+
+socket.on('confirmCribCardsSelected', (game, playerId) => {
+    removeSelectedCards(selectedCards, playerId)
+
+    const indexPlayer = getIndexPlayer(game.players)
+
+    moveCardsToCrib(game.cribIndex === indexPlayer)
+})
+
+socket.on('startPlay', (game) => {  
+    document.querySelectorAll('.selected').forEach(element => {
+        element.classList.remove('selected');
+    });
 })
 
 

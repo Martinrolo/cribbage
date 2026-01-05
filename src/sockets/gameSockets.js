@@ -12,4 +12,18 @@ export function gameplaySockets(io, socket) {
             io.to(room).emit('newRound', roomData.game);
         }
     });
+
+    socket.on('cribCardsSelected', (data) => {
+        const { room, playerId, cards } = data;
+
+        const gameData = rooms.get(room).game;
+        gameData.crib = gameData.crib.concat(cards);
+
+        io.to(room).emit('confirmCribCardsSelected', gameData, playerId)
+
+        if(gameData.crib.length == 4)
+        {
+            io.to(room).emit('startPlay', gameData)
+        }
+    });
 }

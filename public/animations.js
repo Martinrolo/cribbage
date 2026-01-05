@@ -3,8 +3,7 @@ const MAX_SELECTED = 2;
 
 async function dealCards(nbCards, players) {
     for (let i = 0; i < nbCards; i++) {
-        let localPlayerID = localStorage.getItem('playerId')
-        let indexPlayer = players[0].playerId == localPlayerID ? 0 : 1;
+        const indexPlayer = getIndexPlayer(players)
         
         await dealOneCard(true, players[indexPlayer].cards[i], i);
         await dealOneCard(false, null, i);
@@ -77,7 +76,7 @@ async function dealOneCard(isPlayer, cardData, i) {
             hand.appendChild(finalCard);
 
             resolve()
-        }, 400);
+        }, 200);
     });
 }
 
@@ -97,6 +96,34 @@ function onCardClick(cardEl) {
     // Sélection
     cardEl.classList.add('selected');
     selectedCards.push(cardEl);
+}
+
+function moveCardsToCrib(isPlayer) {
+    const crib = isPlayer? document.getElementById('player-crib') : document.getElementById('opponent-crib');
+    crib.classList.add('visible');
+    
+    if(!document.querySelector('.cribCard'))
+    {
+        const back = document.createElement('div');
+        back.className = 'card back cribCard';
+        crib.appendChild(back);
+    }
+}
+
+function removeSelectedCards(selectedCards, playerId) {
+    selectedCards.forEach(card => card.remove());
+    selectedCards = [];
+
+    if(playerId != localStorage.getItem('playerId'))
+    {
+        const opponentHand = document.getElementById('opponent-hand');
+        const cards = opponentHand.querySelectorAll('.card');
+
+
+        for (let i = 0; i < 2 && cards.length - i - 1 >= 0; i++) {
+            cards[cards.length - 1 - i].remove();
+        }
+    }
 }
 
 

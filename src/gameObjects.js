@@ -3,7 +3,7 @@ export let rooms = new Map();
 export class Game {
     constructor() {
         this.players = []
-        this.finalScore = 120;
+        this.finalScore = 121;
         this.cards = []
         this.round = null;
         this.cribIndex = 0;
