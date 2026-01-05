@@ -1,6 +1,6 @@
 import { Player, Game, rooms } from '../gameObjects.js';
 
-export function cribbageSockets(io, socket) {
+export function createGameSockets(io, socket) {
     socket.on('createRoom', (room, playerId) => {
         let game = new Game();
         rooms.set(room, {game: game});

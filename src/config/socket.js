@@ -1,5 +1,5 @@
 import { Server } from 'socket.io'
-import { cribbageSockets } from '../sockets/cribbageSockets.js'
+import { createGameSockets } from '../sockets/createGame.js'
 
 export default function initSocket(httpServer) {
     const io = new Server(httpServer, {
@@ -10,7 +10,7 @@ export default function initSocket(httpServer) {
     })
 
     io.on('connection', (socket) => {
-        cribbageSockets(io, socket);
+        createGameSockets(io, socket);
 
         //TODO: Faire autres fichiers pour sockets d'autres fonctionnalités
     });

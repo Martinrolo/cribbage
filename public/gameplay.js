@@ -1,24 +1,33 @@
 socket.on('gameStarted', async (game) => {
     overlay.style.display = 'none';
-
-    await dealCards(6, true)
+    await dealCards(6, game.players)
 });
 
-
-
-
-
-
-async function dealCards(nbCards, isPlayer) {
+async function dealCards(nbCards, players) {
     for (let i = 0; i < nbCards; i++) {
-        await dealOneCard();
+        let localPlayerID = localStorage.getItem('playerId')
+        let indexPlayer = players[0].playerId == localPlayerID ? 0 : 1;
+        
+        await dealOneCard(true, players[indexPlayer].cards[i]);
+        await dealOneCard(false, null);
     }
 }
 
-async function dealOneCard() {
+async function dealOneCard(isPlayer, cardData) {
     return new Promise(resolve => {
         const deck = document.getElementById('deck');
-        const hand = document.getElementById('player-hand');
+        let hand = null
+        let visible = false;
+
+        if(isPlayer)
+        {
+            hand = document.getElementById('player-hand');
+            visible = true;
+        }
+        else
+        {
+            hand = document.getElementById('opponent-hand');
+        }
 
         const deckRect = deck.getBoundingClientRect();
         const handRect = hand.getBoundingClientRect();
@@ -44,7 +53,23 @@ async function dealOneCard() {
             card.remove();
 
             const finalCard = document.createElement('div');
-            finalCard.className = 'card back';
+
+            if(isPlayer)
+            {
+                const convertedCardData = numToSymbol(cardData)
+                finalCard.className = 'card';
+                finalCard.textContent = convertedCardData.rank + convertedCardData.suit;
+                if(convertedCardData.suit == '♥' || convertedCardData.suit == '♦')
+                {
+                    finalCard.style.color = 'red'
+                }
+            }
+
+            else
+            {
+                finalCard.className = 'card back';
+            }
+
             hand.appendChild(finalCard);
 
             resolve()
