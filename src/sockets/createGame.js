@@ -1,13 +1,13 @@
 import { Player, Game, rooms } from '../gameObjects.js';
 
 export function createGameSockets(io, socket) {
-    socket.on('createRoom', (room, playerId) => {
+    socket.on('createRoom', (room) => {
         let game = new Game();
-        rooms.set(room, {game: game});
+        rooms.set(room, {game: game, animationsDone: 0});
         socket.emit('roomJoined', room);
     });
 
-    socket.on('joinRoom', (room, playerId) => {
+    socket.on('joinRoom', (room) => {
         const roomData = rooms.get(room)
         if (!roomData || roomData.game.players.length >= 2)
         {

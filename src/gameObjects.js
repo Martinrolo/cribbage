@@ -5,7 +5,9 @@ export class Game {
         this.players = []
         this.finalScore = 120;
         this.cards = []
-        this.round = new Round();
+        this.round = null;
+        this.cribIndex = 0;
+        this.crib = [];
     }
 
     initCards() {
@@ -43,11 +45,8 @@ export class Player {
 }
 
 export class Round {
-    // constructor() {
-
-    //     this.initCards();
-    //     this.giveCards();
-    // }
-
-
+    constructor() {
+        this.playerTurn = 0
+        this.step = 0;
+    }
 }

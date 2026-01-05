@@ -82,6 +82,7 @@ html, body {
 }
 
 .center-table {
+    visibility: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -144,7 +145,25 @@ html, body {
     font-weight: bold;
     font-size: 1.2rem;
     box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
+.card.selected {
+    transform: translateY(-18px);
+    box-shadow: 0 0 0 3px gold, 0 10px 25px rgba(0,0,0,0.6);
+}
+
+.card.disabled {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
 
 .card.back {
     background: linear-gradient(135deg, #444, #222);
