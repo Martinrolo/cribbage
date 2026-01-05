@@ -36,50 +36,6 @@
         <p id="waiting-text">En attente de joueurs…</p>
         <button id="start-game-btn">Commencer la partie</button>
     </div>
-    <!-- <main class="table"> -->
-        <!-- Adversaire -->
-        <!-- <section class="hand opponent">
-            <div class="cards">
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-            </div>
-
-            <div class="crib">
-                <div class="card back"></div>
-            </div>
-        </section> -->
-
-        <!-- Zone centrale -->
-        <!-- <section class="center-table">
-            <div class="played-cards">
-                <div class="card back"></div>
-            </div>
-            <div class="count">
-                <span>Compte : 0</span>
-            </div>
-        </section> -->
-
-        <!-- Joueur -->
-        <!-- <section class="hand player">
-            <div class="cards">
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-                <div class="card back"></div>
-            </div>
-
-            <div class="crib">
-                <div class="card back"></div>
-            </div>
-        </section> -->
-    <!-- </main> -->
-
     <section class="table">
         <div class="hand opponent">
             <div class="cards" id="opponent-hand"></div>
@@ -100,7 +56,9 @@
 
     <!-- ACTIONS -->
     <footer class="controls">
-            <button id="confirmerCrib">Confirmer choix</button>
+        <button id="confirmerCrib" class="hidden">Confirmer crib</button>
+        <button id="jouerCarteBtn" class="hidden">Jouer carte</button>
+        <button id="goBtn" class="hidden">Go</button>
     </footer>
 
 </div>

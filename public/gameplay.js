@@ -7,6 +7,7 @@ socket.on('newRound', (game) => {
     const indexPlayer = getIndexPlayer(game.players)
 
     document.querySelector('.controls').classList.add('show')
+    document.getElementById('confirmerCrib').classList.remove('hidden')
     document.querySelector('.center-table').style.visibility = 'visible'
 
     if(game.cribIndex === indexPlayer)
@@ -34,9 +35,7 @@ confirmerCrib.addEventListener('click', function() {
 
 socket.on('confirmCribCardsSelected', (game, playerId) => {
     removeSelectedCards(selectedCards, playerId)
-
     const indexPlayer = getIndexPlayer(game.players)
-
     moveCardsToCrib(game.cribIndex === indexPlayer)
 })
 
@@ -44,6 +43,20 @@ socket.on('startPlay', (game) => {
     document.querySelectorAll('.selected').forEach(element => {
         element.classList.remove('selected');
     });
+
+    document.querySelector('.controls').classList.remove('show')
+    const jouer = document.getElementById('jouerCarteBtn');
+    const go = document.getElementById('goBtn');
+    const crib = document.getElementById('confirmerCrib');
+
+    jouer.classList.remove('hidden');
+    go.classList.remove('hidden');
+    crib.classList.add('hidden');
+
+    if(game.round.playerTurn == getIndexPlayer(game.players))
+    {
+        document.querySelector('.controls').classList.add('show')
+    }
 })
 
 

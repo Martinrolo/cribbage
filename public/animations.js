@@ -49,7 +49,6 @@ async function dealOneCard(isPlayer, cardData, i) {
         // fin animation
         setTimeout(() => {
             card.remove();
-
             const finalCard = document.createElement('div');
 
             if(isPlayer)
@@ -81,8 +80,6 @@ async function dealOneCard(isPlayer, cardData, i) {
 }
 
 function onCardClick(cardEl) {
-    if (cardEl.classList.contains('disabled')) return;
-
     // Désélection
     if (cardEl.classList.contains('selected')) {
         cardEl.classList.remove('selected');
@@ -118,7 +115,6 @@ function removeSelectedCards(selectedCards, playerId) {
     {
         const opponentHand = document.getElementById('opponent-hand');
         const cards = opponentHand.querySelectorAll('.card');
-
 
         for (let i = 0; i < 2 && cards.length - i - 1 >= 0; i++) {
             cards[cards.length - 1 - i].remove();
