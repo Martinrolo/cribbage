@@ -1,5 +1,6 @@
 socket.on('gameStarted', async (game) => {
     overlay.style.display = 'none';
+    document.getElementById('deck').classList.remove('hidden')
     await dealCards(6, game.players)
 });
 
@@ -12,13 +13,16 @@ socket.on('newRound', (game) => {
 
     if(game.cribIndex === indexPlayer)
     {
-        document.querySelector('.center-table').textContent = "Choisis des cartes pour ton crib"
+        document.getElementById('messageMilieu').textContent = "Choisis des cartes pour ton crib"
     }
 
     else
     {
-        document.querySelector('.center-table').textContent = "Choisis des cartes pour le crib de l'adversaire"
+        document.getElementById('messageMilieu').textContent = "Choisis des cartes pour le crib de l'adversaire"
     }
+
+    document.getElementById('messageMilieu').classList.remove('hidden')
+    document.getElementById('deck').classList.add('hidden')
 });
 
 confirmerCrib.addEventListener('click', function() {
@@ -53,9 +57,15 @@ socket.on('startPlay', (game) => {
     go.classList.remove('hidden');
     crib.classList.add('hidden');
 
+    //Afficher nouveau message
+    document.getElementById('deck').classList.remove('hidden');
+    document.getElementById('messageMilieu').textContent = "Tour de l'adversaire...\nCompte: 0"
+
+
     if(game.round.playerTurn == getIndexPlayer(game.players))
     {
         document.querySelector('.controls').classList.add('show')
+        document.getElementById('messageMilieu').textContent = "À ton tour!\nCompte: 0"
     }
 })
 

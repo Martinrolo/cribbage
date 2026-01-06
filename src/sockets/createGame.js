@@ -59,10 +59,7 @@ export function createGameSockets(io, socket) {
         //init cards
         roomData.game.initCards();
         roomData.game.giveCardsPlayers();
-
-        console.log("GAME DATA:")
-        console.log(roomData.game.players[0].cards)
-
+        
         roomData.game.started = true;
         io.to(room).emit('gameStarted', roomData.game);
     });

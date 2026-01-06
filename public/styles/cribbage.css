@@ -74,25 +74,26 @@ html, body {
 }
 
 /* TABLE */
-.table {         
+.table {
+    position: relative;
     display: grid;
-    grid-template-rows: 1fr auto 1fr;
+    grid-template-rows: 1fr 1fr;
     padding: 40px;
 }
 
 .center-table {
-    visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-/* .hand {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    min-height: 120px;
-} */
+    gap: 10px;
+
+    pointer-events: none; /* important pour pas bloquer les cartes */
+}
 
 .hand {
     position: relative;
@@ -157,7 +158,7 @@ html, body {
 
 .center-table {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 15px;
@@ -340,6 +341,12 @@ button.danger:hover {
     position: relative;
 }
 
+#messageMilieu {
+    font-size: 1.1rem;
+    color: #ddd;
+    margin: 0;
+}
+
 .dealt-card {
     position: fixed;
     width: 40px;
@@ -356,4 +363,8 @@ button.danger:hover {
     display: none;
     pointer-events: none;
     opacity: 0;
+}
+
+.hidden {
+    display: none !important;
 }
