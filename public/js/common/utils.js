@@ -14,3 +14,9 @@ function getIndexPlayer(players)
     let localPlayerID = localStorage.getItem('playerId')
     return players[0].playerId == localPlayerID ? 0 : 1;
 }
+
+function getCardValue(num)
+{
+    if(num % 13 < 10) return num + 1;
+    else return 10;
+}

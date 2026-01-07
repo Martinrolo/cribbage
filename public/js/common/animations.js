@@ -64,7 +64,7 @@ async function dealOneCard(isPlayer, cardData, i) {
                 //Events de sélection
                 finalCard.dataset.index = i;        
                 finalCard.dataset.card = cardData;  
-                finalCard.addEventListener('click', () => onCardClick(finalCard));
+                finalCard.addEventListener('click', () => onCardClick(finalCard, 2));
             }
 
             else
@@ -79,7 +79,7 @@ async function dealOneCard(isPlayer, cardData, i) {
     });
 }
 
-function onCardClick(cardEl) {
+function onCardClick(cardEl, maxSelect) {
     // Désélection
     if (cardEl.classList.contains('selected')) {
         cardEl.classList.remove('selected');
@@ -88,7 +88,7 @@ function onCardClick(cardEl) {
     }
 
     // Max atteint
-    if (selectedCards.length >= MAX_SELECTED) return;
+    if (selectedCards.length >= maxSelect) return;
 
     // Sélection
     cardEl.classList.add('selected');

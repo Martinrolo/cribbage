@@ -29,14 +29,12 @@ export function createGameSockets(io, socket) {
 
         if(roomData.game.players.length === 2)
         {
-            socket.emit('roomFull', 'Cette room est pleine')
+            socket.emit('error', 'Cette room est pleine')
             return;
         }
 
         roomData.game.players.push(new Player(playerId));
         socket.join(room);
-        console.log("PLAYERS: ")
-        console.log(roomData)
 
         io.to(room).emit('playerJoined', roomData.game);
     });
@@ -59,7 +57,7 @@ export function createGameSockets(io, socket) {
         //init cards
         roomData.game.initCards();
         roomData.game.giveCardsPlayers();
-        
+
         roomData.game.started = true;
         io.to(room).emit('gameStarted', roomData.game);
     });
