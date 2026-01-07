@@ -34,7 +34,7 @@ function setPlayerInfo(game)
 
         playerDivs[i].style.visibility = 'visible';
 
-        if (game.players[i].playerId === localStorage.getItem('playerId')) {
+        if (game.players[i].playerId === localPlayerId) {
             playerDivs[i].classList.add('you');
         }
     }
@@ -53,6 +53,10 @@ function updateWaitingState(game) {
     startBtn.style.display = 'block';
     overlay.style.pointerEvents = 'all';
 }
+
+startBtn.addEventListener('click', () => {
+    socket.emit('startGame', room);
+});
 
 
 

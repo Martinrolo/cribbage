@@ -11,8 +11,7 @@ function numToSymbol(num)
 
 function getIndexPlayer(players)
 {
-    let localPlayerID = localStorage.getItem('playerId')
-    return players[0].playerId == localPlayerID ? 0 : 1;
+    return players[0].playerId == localPlayerId ? 0 : 1;
 }
 
 function getCardValue(num)

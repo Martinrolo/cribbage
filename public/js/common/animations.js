@@ -1,7 +1,7 @@
 let selectedCards = [];
 const MAX_SELECTED = 2;
 
-async function dealCards(nbCards, players) {
+async function dealCardsAnimation(nbCards, players) {
     for (let i = 0; i < nbCards; i++) {
         const indexPlayer = getIndexPlayer(players)
         
@@ -111,7 +111,7 @@ function removeSelectedCards(selectedCards, playerId) {
     selectedCards.forEach(card => card.remove());
     selectedCards = [];
 
-    if(playerId != localStorage.getItem('playerId'))
+    if(playerId != localPlayerId)
     {
         const opponentHand = document.getElementById('opponent-hand');
         const cards = opponentHand.querySelectorAll('.card');

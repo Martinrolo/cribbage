@@ -1,4 +1,4 @@
-socket.emit('pageLoaded', room, localStorage.getItem('playerId'));
+socket.emit('pageLoaded', room, localPlayerId);
 
 socket.on('playerJoined', (game) => {
     setPlayerInfo(game)
@@ -8,8 +8,4 @@ socket.on('playerJoined', (game) => {
 socket.on('error', (errorMsg) => {
     alert(errorMsg);
     window.location.replace('/');
-});
-
-startBtn.addEventListener('click', () => {
-    socket.emit('startGame', room);
 });
