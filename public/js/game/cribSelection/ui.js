@@ -17,7 +17,6 @@ function newRound(game)
     {
         document.getElementById('messageMilieu').textContent = "Choisis des cartes pour ton crib"
     }
-
     else
     {
         document.getElementById('messageMilieu').textContent = "Choisis des cartes pour le crib de l'adversaire"
@@ -29,13 +28,13 @@ function newRound(game)
 
 function confirmCribCardsSelected(game, playerId)
 {
-    removeSelectedCards(selectedCards, playerId)
+    removeSelectedCards(playerId)
     const indexPlayer = getIndexPlayer(game.players)
-    moveCardsToCrib(game.cribIndex === indexPlayer)
+    moveCardsToCribAnimation(game.cribIndex === indexPlayer)
 }
 
 confirmerCrib.addEventListener('click', function() {
-    if (selectedCards.length === MAX_SELECTED) {
+    if (selectedCards.length === MAX_SELECTED_CRIB) {
         const cards = selectedCards.map(card => Number(card.dataset.card));
 
         socket.emit('cribCardsSelected', { room, playerId: localPlayerId, cards });

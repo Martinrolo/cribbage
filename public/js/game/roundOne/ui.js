@@ -1,26 +1,29 @@
 function startPlay(game)
-{
+{   
+    maxSelectedCards = 1;
+    selectedCards = [];
+    
     document.querySelectorAll('.selected').forEach(element => {
         element.classList.remove('selected');
     });
 
-    document.querySelector('.controls').classList.remove('show')
-    const jouer = document.getElementById('jouerCarteBtn');
-    const go = document.getElementById('goBtn');
-    const crib = document.getElementById('confirmerCrib');
-
-    jouer.classList.remove('hidden');
-    go.classList.remove('hidden');
-    crib.classList.add('hidden');
-
-    //Afficher nouveau message
+    document.getElementById('confirmerCrib').classList.add('hidden');
     document.getElementById('deck').classList.remove('hidden');
-    document.getElementById('messageMilieu').textContent = "Tour de l'adversaire...\nCompte: 0"
-
+    document.getElementById('messageMilieu').textContent = "Compte: 0"
 
     if(game.round.playerTurn == getIndexPlayer(game.players))
     {
-        document.querySelector('.controls').classList.add('show')
-        document.getElementById('messageMilieu').textContent = "À ton tour!\nCompte: 0"
+        showButtonsRoundOne()
     }
 }
+
+function showButtonsRoundOne()
+{
+    document.querySelector('.controls').classList.add('show')
+    document.getElementById('jouerCarteBtn').classList.remove('hidden')
+    document.getElementById('goBtn').classList.remove('hidden')
+}
+
+document.getElementById('jouerCarteBtn').addEventListener('click', function() {
+    console.log(selectedCards)
+})

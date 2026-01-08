@@ -1,18 +1,15 @@
-let selectedCards = [];
-const MAX_SELECTED = 2;
-
 async function dealCardsAnimation(nbCards, players) {
     for (let i = 0; i < nbCards; i++) {
         const indexPlayer = getIndexPlayer(players)
         
-        await dealOneCard(true, players[indexPlayer].cards[i], i);
-        await dealOneCard(false, null, i);
+        await dealOneCardAnimation(true, players[indexPlayer].cards[i], i);
+        await dealOneCardAnimation(false, null, i);
     }
 
     socket.emit('cardsDealt', (room))
 }
 
-async function dealOneCard(isPlayer, cardData, i) {
+async function dealOneCardAnimation(isPlayer, cardData, i) {
     return new Promise(resolve => {
         const deck = document.getElementById('deck');
         let hand = null
@@ -61,10 +58,9 @@ async function dealOneCard(isPlayer, cardData, i) {
                     finalCard.style.color = 'red'
                 }
 
-                //Events de sélection
-                finalCard.dataset.index = i;        
-                finalCard.dataset.card = cardData;  
-                finalCard.addEventListener('click', () => onCardClick(finalCard, 2));
+                finalCard.dataset.index = i;
+                finalCard.dataset.card = cardData; 
+                finalCard.addEventListener('click', onCardClick);
             }
 
             else
@@ -79,23 +75,25 @@ async function dealOneCard(isPlayer, cardData, i) {
     });
 }
 
-function onCardClick(cardEl, maxSelect) {
+function onCardClick(e) {
+    const card = e.currentTarget;
+
     // Désélection
-    if (cardEl.classList.contains('selected')) {
-        cardEl.classList.remove('selected');
-        selectedCards = selectedCards.filter(c => c !== cardEl);
+    if (card.classList.contains('selected')) {
+        card.classList.remove('selected');
+        selectedCards = selectedCards.filter(c => c !== card);
         return;
     }
 
     // Max atteint
-    if (selectedCards.length >= maxSelect) return;
+    if (selectedCards.length >= maxSelectedCards) return;
 
     // Sélection
-    cardEl.classList.add('selected');
-    selectedCards.push(cardEl);
+    card.classList.add('selected');
+    selectedCards.push(card);
 }
 
-function moveCardsToCrib(isPlayer) {
+function moveCardsToCribAnimation(isPlayer) {    
     const crib = isPlayer? document.getElementById('player-crib') : document.getElementById('opponent-crib');
     crib.classList.add('visible');
     
@@ -107,17 +105,20 @@ function moveCardsToCrib(isPlayer) {
     }
 }
 
-function removeSelectedCards(selectedCards, playerId) {
-    selectedCards.forEach(card => card.remove());
-    selectedCards = [];
+function removeSelectedCards(playerId) {
+    if(playerId == localPlayerId)
+    {
+        selectedCards.forEach(card => card.remove());
+        selectedCards = [];
+    }
 
-    if(playerId != localPlayerId)
+    else
     {
         const opponentHand = document.getElementById('opponent-hand');
         const cards = opponentHand.querySelectorAll('.card');
 
-        for (let i = 0; i < 2 && cards.length - i - 1 >= 0; i++) {
-            cards[cards.length - 1 - i].remove();
+        for (let i = 0; i < 2; i++) {
+            cards[i].remove();
         }
     }
 }
