@@ -1,14 +1,15 @@
-import { Player, Game, rooms } from '../gameObjects.js';
+import { GameManager } from '../game/gameManager.js';
+import { RoomManager } from '../rooms/roomManager.js'
 
-export function createGameSockets(io, socket) {
+export default function menuSockets(io, socket) {
     socket.on('createRoom', (room) => {
-        let game = new Game();
-        rooms.set(room, {game: game, animationsDone: 0});
+        RoomManager.createRoom(room);
+        rooms.set(room, {game: GameManager.game, animationsDone: 0});
         socket.emit('roomJoined', room);
     });
 
     socket.on('joinRoom', (room) => {
-        const roomData = rooms.get(room)
+        // const roomData = rooms.get(room)
         if (!roomData || roomData.game.players.length >= 2)
         {
             socket.emit('error', "Cette room n'existe pas!");
@@ -37,17 +38,6 @@ export function createGameSockets(io, socket) {
         socket.join(room);
 
         io.to(room).emit('playerJoined', roomData.game);
-    });
-
-    socket.on('disconnect', () => {
-        // for (const [roomId, room] of rooms.entries()) {
-        //     room.game.players = room.game.players.filter(p => p.playerId !== socket.id);
-        //     if (room.game.players.length === 0) {
-        //         rooms.delete(roomId);
-        //     } else {
-        //         io.to(roomId).emit('roomUpdate', room);
-        //     }
-        // }
     });
 
     socket.on('startGame', (room) => {

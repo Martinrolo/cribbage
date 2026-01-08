@@ -1,4 +1,4 @@
-import { rooms, Round } from '../gameObjects.js';
+import { rooms, Round } from '../game/gameObjects.js';
 
 export function gameplaySockets(io, socket) {
     socket.on('cardsDealt', (room) => {

@@ -18,7 +18,6 @@ export class Game {
 
     giveCardsPlayers() {
         for (let i = 0; i < 6; i++) {
-            //Donner 6 cartes par joueur
             for (const player of this.players) {
                 player.cards[i] = this.dealCard()
             }

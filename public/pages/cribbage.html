@@ -33,8 +33,8 @@
 
     <!-- TABLE -->
     <div class="table-overlay" id="table-overlay">
-        <p id="waiting-text">En attente de joueurs…</p>
-        <button id="start-game-btn">Commencer la partie</button>
+        <p id="waitingText">En attente de joueurs…</p>
+        <button id="startGameBtn">Commencer la partie</button>
     </div>
     <section class="table">
         <div class="hand opponent">
@@ -56,8 +56,8 @@
 
     <!-- ACTIONS -->
     <footer class="controls">
-        <button id="confirmerCrib" class="hidden">Confirmer crib</button>
-        <button id="jouerCarteBtn" class="hidden">Jouer carte</button>
+        <button id="confirmCrib" class="hidden">Confirmer crib</button>
+        <button id="playCardBtn" class="hidden">Jouer carte</button>
         <button id="goBtn" class="hidden">Go</button>
     </footer>
 
@@ -66,12 +66,5 @@
 </body>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/common/constants.js"></script>
-<script src="/js/common/utils.js"></script>
-<script src="/js/common/animations.js"></script>
-<script src="/js/game/waitingRoom/sockets.js"></script>
-<script src="/js/game/waitingRoom/ui.js"></script>
-<script src="/js/game/cribSelection/sockets.js"></script>
-<script src="/js/game/cribSelection/ui.js"></script>
-<script src="/js/game/roundOne/sockets.js"></script>
-<script src="/js/game/roundOne/ui.js"></script>
+<script type="module" src="/js/common/game.js"></script>
 </html>

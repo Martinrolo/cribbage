@@ -6,8 +6,8 @@ if (!room) {
 const roomIdSpan = document.getElementById('room-id');
 const copyBtn = document.getElementById('copy-room');
 const overlay = document.getElementById('table-overlay');
-const waitingText = document.getElementById('waiting-text');
-const startBtn = document.getElementById('start-game-btn');
+const waitingText = document.getElementById('waitingText');
+const startBtn = document.getElementById('startGameBtn');
 roomIdSpan.textContent = room;
 
 copyBtn.addEventListener('click', async () => {
@@ -20,25 +20,7 @@ copyBtn.addEventListener('click', async () => {
     }
 });
 
-function setPlayerInfo(game)
-{
-    const playerDivs = document.querySelectorAll('.player-score')
 
-    for(let i = 0; i < game.players.length; i++)
-    {
-        const nameEl = playerDivs[i].querySelector('h2');
-        const scoreEl = playerDivs[i].querySelector('span');
-
-        nameEl.textContent = game.players[i].name;
-        scoreEl.textContent = "Score: " + game.players[i].score;
-
-        playerDivs[i].style.visibility = 'visible';
-
-        if (game.players[i].playerId === localPlayerId) {
-            playerDivs[i].classList.add('you');
-        }
-    }
-}
 
 function updateWaitingState(game) {
     if (game.players.length < 2) {

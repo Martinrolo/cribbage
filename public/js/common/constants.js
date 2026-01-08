@@ -1,9 +1,8 @@
-const params = new URLSearchParams(window.location.search);
-const room = params.get('room');
 const socket = io('http://localhost:5000/')
-const localPlayerId = localStorage.getItem('playerId')
-const MAX_SELECTED_CRIB = 2;
-const MAX_SELECTED_PLAY = 1
+
+const params = new URLSearchParams(window.location.search);
+const localRoomId = params.get('room');
+const localPlayerId = crypto.randomUUID();
 
 let selectedCards = [];
-let maxSelectedCards = 2
+let maxSelectedCards = 2;
