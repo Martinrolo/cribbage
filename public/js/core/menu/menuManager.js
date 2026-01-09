@@ -1,8 +1,4 @@
 export default class MenuManager {
-    constructor() {
-        this.socket = null
-    }
-
     setSocket(socket) {
         this.socket = socket;
     }

@@ -20,7 +20,6 @@ export default class WaitingRoomManager {
     }
 
     onStartGame() {
-        console.log("ON START GAME")
         this.sockets.emitStartGame(localRoomId);
     }
 
