@@ -5,6 +5,7 @@ export default class Room {
         this.id = id;
         this.game = GameManager.createGame();
         this.started = false;
+        this.animationsDone = 0;
     }
 
     isFull() {

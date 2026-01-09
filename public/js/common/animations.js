@@ -1,3 +1,10 @@
+const roomIdSpan = document.getElementById('room-id');
+const copyBtn = document.getElementById('copy-room');
+const overlay = document.getElementById('table-overlay');
+const waitingText = document.getElementById('waitingText');
+const startBtn = document.getElementById('startGameBtn');
+roomIdSpan.textContent = localRoomId;
+
 async function dealCardsAnimation(nbCards, players) {
     for (let i = 0; i < nbCards; i++) {
         const indexPlayer = getIndexPlayer(players)
@@ -6,7 +13,7 @@ async function dealCardsAnimation(nbCards, players) {
         await dealOneCardAnimation(false, null, i);
     }
 
-    socket.emit('cardsDealt', (room))
+    socket.emit('cardsDealt', (localRoomId))
 }
 
 async function dealOneCardAnimation(isPlayer, cardData, i) {

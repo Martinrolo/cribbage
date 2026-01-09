@@ -16,6 +16,10 @@ class RoomManager {
     static getRoom(roomId) {
         return this.rooms.get(roomId);
     }
+
+    static getGame(roomId) {
+        return this.rooms.get(roomId).game;
+    }
 }
 
 export default RoomManager;

@@ -1,10 +1,3 @@
-const roomIdSpan = document.getElementById('room-id');
-const copyBtn = document.getElementById('copy-room');
-const overlay = document.getElementById('table-overlay');
-const waitingText = document.getElementById('waitingText');
-const startBtn = document.getElementById('startGameBtn');
-roomIdSpan.textContent = localRoomId;
-
 export function initWaitingRoomUI(waitingRoomManager)
 {
     window.addEventListener("load", () => {
