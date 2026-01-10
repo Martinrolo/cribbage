@@ -19,4 +19,9 @@ export default class CribSelectionSockets {
     {
         socket.emit('cribCardsSelected', { roomId: localRoomId, playerId: localPlayerId, cards });
     }
+
+    emitCardsDealt()
+    {
+        socket.emit('cardsDealt', (localRoomId))
+    }
 }

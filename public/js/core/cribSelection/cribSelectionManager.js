@@ -5,9 +5,10 @@ export default class CribSelectionManager {
         this.sockets = sockets;
     }
 
-    gameStarted(game)
+    async gameStarted(game)
     {
-        dealCards(game);
+        await dealCards(game);
+        this.sockets.emitCardsDealt();
     }
     
     newRound(game)

@@ -10,6 +10,10 @@ export default class RoundOneManager {
         maxSelectedCards = 1;
         selectedCards = [];
         
-        startPlay(game);
+        startPlay();
+        if(game.round.playerTurn == getIndexPlayer(game.players))
+        {
+            showButtonsRoundOne()
+        }
     }
 }

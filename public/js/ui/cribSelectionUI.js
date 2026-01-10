@@ -8,7 +8,7 @@ export function initCribSelectionUI(cribSelectionManager)
 export async function dealCards(game)
 {
     overlay.style.display = 'none';
-    document.getElementById('deck').classList.remove('hidden')
+    deck.classList.remove('hidden')
     await dealCardsAnimation(6, game.players)
 }
 
@@ -16,21 +16,21 @@ export function newRound(game)
 {
     const indexPlayer = getIndexPlayer(game.players)
 
-    document.querySelector('.controls').classList.add('show')
-    document.getElementById('confirmCrib').classList.remove('hidden')
-    document.querySelector('.center-table').style.visibility = 'visible'
+    controlsDiv.classList.add('show')
+    confirmCribBtn.classList.remove('hidden')
+    centerTableDiv.style.visibility = 'visible'
 
     if(game.cribIndex === indexPlayer)
     {
-        document.getElementById('midMessage').textContent = "Choisis des cartes pour ton crib"
+        midMessageDiv.textContent = "Choisis des cartes pour ton crib"
     }
     else
     {
-        document.getElementById('midMessage').textContent = "Choisis des cartes pour le crib de l'adversaire"
+        midMessageDiv.textContent = "Choisis des cartes pour le crib de l'adversaire"
     }
 
-    document.getElementById('midMessage').classList.remove('hidden')
-    document.getElementById('deck').classList.add('hidden')
+    midMessageDiv.classList.remove('hidden')
+    deck.classList.add('hidden')
 }
 
 export function confirmCribCardsSelected(game, playerId)

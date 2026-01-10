@@ -1,32 +1,24 @@
 export function initRoundOneUI(roundOneManager)
 {
-    //TODO: Mettre tous les getElementByID dans un fichier constant
-
-
-    document.getElementById('playCardBtn').addEventListener('click', function() {
+    playCardBtn.addEventListener('click', function() {
         roundOneManager.playCard(selectedCards)
     })
 }
 
-export function startPlay(game)
+export function startPlay()
 {       
     document.querySelectorAll('.selected').forEach(element => {
         element.classList.remove('selected');
     });
 
-    document.getElementById('confirmCrib').classList.add('hidden');
-    document.getElementById('deck').classList.remove('hidden');
-    document.getElementById('midMessage').textContent = "Compte: 0"
-
-    if(game.round.playerTurn == getIndexPlayer(game.players))
-    {
-        showButtonsRoundOne()
-    }
+    confirmCribBtn.classList.add('hidden');
+    deckDiv.classList.remove('hidden');
+    setScore(0)
 }
 
 export function showButtonsRoundOne()
 {
-    document.querySelector('.controls').classList.add('show')
-    document.getElementById('playCardBtn').classList.remove('hidden')
-    document.getElementById('goBtn').classList.remove('hidden')
+    controlsDiv.classList.add('show')
+    playCardBtn.classList.remove('hidden')
+    goBtn.classList.remove('hidden')
 }

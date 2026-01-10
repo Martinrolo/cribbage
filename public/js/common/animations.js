@@ -1,10 +1,3 @@
-const roomIdSpan = document.getElementById('room-id');
-const copyBtn = document.getElementById('copy-room');
-const overlay = document.getElementById('table-overlay');
-const waitingText = document.getElementById('waitingText');
-const startBtn = document.getElementById('startGameBtn');
-roomIdSpan.textContent = localRoomId;
-
 async function dealCardsAnimation(nbCards, players) {
     for (let i = 0; i < nbCards; i++) {
         const indexPlayer = getIndexPlayer(players)
@@ -12,24 +5,11 @@ async function dealCardsAnimation(nbCards, players) {
         await dealOneCardAnimation(true, players[indexPlayer].cards[i], i);
         await dealOneCardAnimation(false, null, i);
     }
-
-    socket.emit('cardsDealt', (localRoomId))
 }
 
-async function dealOneCardAnimation(isPlayer, cardData, i) {
+async function dealOneCardAnimation(isPlayer, cardData, index) {
     return new Promise(resolve => {
-        const deck = document.getElementById('deck');
-        let hand = null
-
-        if(isPlayer)
-        {
-            hand = document.getElementById('player-hand');
-            visible = true;
-        }
-        else
-        {
-            hand = document.getElementById('opponent-hand');
-        }
+        const hand = isPlayer ? playerHand : opponentHand;
 
         const deckRect = deck.getBoundingClientRect();
         const handRect = hand.getBoundingClientRect();
@@ -40,7 +20,6 @@ async function dealOneCardAnimation(isPlayer, cardData, i) {
 
         const card = document.createElement('div');
         card.className = 'dealt-card';
-
         card.style.left = `${startX}px`;
         card.style.top = `${startY}px`;
 
@@ -53,33 +32,39 @@ async function dealOneCardAnimation(isPlayer, cardData, i) {
         // fin animation
         setTimeout(() => {
             card.remove();
-            const finalCard = document.createElement('div');
 
-            if(isPlayer)
-            {
-                const convertedCardData = numToSymbol(cardData)
-                finalCard.className = 'card';
-                finalCard.textContent = convertedCardData.rank + convertedCardData.suit;
-                if(convertedCardData.suit == '♥' || convertedCardData.suit == '♦')
-                {
-                    finalCard.style.color = 'red'
-                }
-
-                finalCard.dataset.index = i;
-                finalCard.dataset.card = cardData; 
-                finalCard.addEventListener('click', onCardClick);
-            }
-
-            else
-            {
-                finalCard.className = 'card back';
-            }
-
-            hand.appendChild(finalCard);
+            hand.appendChild(createCard(isPlayer, cardData, index));
 
             resolve()
         }, 200);
     });
+}
+
+function createCard(isPlayer, cardData, index)
+{
+    const cardDiv = document.createElement('div');
+
+    if(isPlayer)
+    {
+        const convertedCardData = numToSymbol(cardData)
+        cardDiv.className = 'card';
+        cardDiv.textContent = convertedCardData.rank + convertedCardData.suit;
+        if(convertedCardData.suit == '♥' || convertedCardData.suit == '♦')
+        {
+            cardDiv.style.color = 'red'
+        }
+
+        cardDiv.dataset.index = index;
+        cardDiv.dataset.card = cardData; 
+        cardDiv.addEventListener('click', onCardClick);
+    }
+
+    else
+    {
+        cardDiv.className = 'card back';
+    }
+
+    return cardDiv;
 }
 
 function onCardClick(e) {
@@ -121,13 +106,17 @@ function removeSelectedCards(playerId) {
 
     else
     {
-        const opponentHand = document.getElementById('opponent-hand');
         const cards = opponentHand.querySelectorAll('.card');
 
         for (let i = 0; i < 2; i++) {
             cards[i].remove();
         }
     }
+}
+
+function setScore(score)
+{
+    midMessageDiv.textContent = "Compte: " + score
 }
 
 

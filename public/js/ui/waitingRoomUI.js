@@ -22,20 +22,19 @@ export function initWaitingRoomUI(waitingRoomManager)
 
 export function setPlayerInfo(game)
 {
-    const playerDivs = document.querySelectorAll('.player-score')
 
     for(let i = 0; i < game.players.length; i++)
     {
-        const nameEl = playerDivs[i].querySelector('h2');
-        const scoreEl = playerDivs[i].querySelector('span');
+        const nameEl = playerScoreDiv[i].querySelector('h2');
+        const scoreEl = playerScoreDiv[i].querySelector('span');
 
         nameEl.textContent = game.players[i].name;
         scoreEl.textContent = "Score: " + game.players[i].score;
 
-        playerDivs[i].style.visibility = 'visible';
+        playerScoreDiv[i].style.visibility = 'visible';
 
         if (game.players[i].playerId === localPlayerId) {
-            playerDivs[i].classList.add('you');
+            playerScoreDiv[i].classList.add('you');
         }
     }
 }
